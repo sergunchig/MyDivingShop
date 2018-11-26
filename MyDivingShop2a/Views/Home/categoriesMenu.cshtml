@@ -1,0 +1,8 @@
+﻿@model IEnumerable<MyDivingShop.Models.Category>
+
+<h2>Категории</h2>
+@foreach(var cat in Model)
+{
+    <li>@Html.ActionLink(cat.CatName, "Browse" ,"Home", new {cat = cat.CatId }, null)</li>
+}
+

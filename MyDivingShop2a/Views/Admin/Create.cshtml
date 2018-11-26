@@ -1,0 +1,73 @@
+﻿@model MyDivingShop.Models.Product
+
+@{
+                /**/
+
+                ViewBag.Title = "Create";
+                Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <div class="container">
+        <div id="sideBar">
+            <ul>
+                <li>@Html.ActionLink("Добавить категорию", "CreateCategory", "Admin")</li>
+            </ul>
+        </div>
+    </div>
+
+    <fieldset>
+        <legend>Добавление товара</legend>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CatId, "Категория")
+        </div>
+        <div class="editor-fields">
+            @Html.DropDownList("CatId", String.Empty)
+            @Html.ValidationMessageFor(model => model.CatId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ComId, "Производитель")
+        </div>
+        <div class="editor-fields">
+            @Html.DropDownList("ComId", String.Empty)
+            @Html.ValidationMessageFor(model => model.ComId)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProdName, "Наименование")
+        </div>
+        <div class="editor-fields">
+            @Html.EditorFor(model => model.ProdName)
+            @Html.ValidationMessageFor(model => model.ProdName)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Price, "Цена")
+        </div>
+        <div class="editor-fields">
+            @Html.EditorFor(model => model.Price)
+            @Html.ValidationMessageFor(model => model.Price)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Quantity, "Кол-во на складе")
+        </div>
+        <div class="editor-fields">
+            @Html.EditorFor(model => model.Price)
+            @Html.ValidationMessageFor(model => model.Price)
+        </div>
+
+        <p>
+            <input type="submit" value="Создать" />
+        </p>
+
+    </fieldset>
+    <div>
+        @Html.ActionLink("На главную", "Index", "Home")
+    </div>
+}
+

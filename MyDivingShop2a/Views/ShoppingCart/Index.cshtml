@@ -1,0 +1,52 @@
+﻿@model MyDivingShop.ViewModels.ShopingCartViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MyDivingShop</title>
+</head>
+<body>
+    @*<div>
+            @Html.Partial("categoriesMenu")
+        </div>*@
+    <div>
+        <h3>ShoppingCart</h3>
+        <table>
+            <tr>
+                <td><p>Продукт</p></td>
+                <td><p>цена</p></td>
+                <td><p>количество</p></td>
+                <td></td>
+            </tr>
+            @foreach (var items in Model.CartItems)
+            {
+                <tr>
+                    <td><p>@items.ProductName</p></td>
+                    <td><p>@items.ProductPrice</p></td>
+                    <td><p>@items.QttProduct</p></td>
+                </tr>
+            }
+            <tr>
+                <td><p>всего:</p></td>
+                <td>
+                    <p>@Model.CartTotal</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <p>
+                @Html.ActionLink("оформить", "Buy", "ShoppingCart")
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+

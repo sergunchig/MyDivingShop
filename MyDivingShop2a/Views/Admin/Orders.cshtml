@@ -1,0 +1,41 @@
+﻿@model IEnumerable<MyDivingShop.Models.Orders>
+
+@{
+    ViewBag.Title = "Orders";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Orders</title>
+</head>
+<body>
+    <div>
+        <h3>Список заказов</h3>
+        <table>
+            <tr>
+                <td><p>Код заказа</p></td>
+                <td><p>Дата</p></td>
+                <td><p>Статус</p></td>
+                <td></td>
+            </tr>
+
+            @foreach (var b in Model)
+            {
+                <tr>
+                    <td><p>@b.OrderId</p></td>
+                    <td><p>@b.DateTime</p></td>
+                    <td><p>@b.StatusId</p></td>
+                    <td>
+                        <p class="button">
+                            @Html.ActionLink("Подробнее", "Info", "Admin", new { id = b.OrderId }, null)
+                        </p>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

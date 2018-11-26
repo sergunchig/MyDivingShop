@@ -1,7 +1,7 @@
 ﻿
-
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Browse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -13,26 +13,29 @@
 </head>
 <body>
     <div>
-        <h3>Снаряга в наличие</h3>
+        <h3>Browse</h3>
         <table>
             <tr>
                 <td><p>Название продукта</p></td>
                 <td><p>Цена</p></td>
-                <td><p>на складе</p></td>
                 <td></td>
             </tr>
 
-            @foreach (var b in ViewBag.produkts)
+            @foreach (var b in Model)
             {
                 <tr>
                     <td><p>@b.ProdName</p></td>
                     <td><p>@b.Price</p></td>
                     <td><p>@b.Quantity</p></td>
-                    <td><p class="button">
-                        @Html.ActionLink("Купить", "AddToCart", "ShoppingCart", new { id=b.OrderCodeId},null)</p></td>
+                    <td>
+                        <p class="button">
+                            @Html.ActionLink("Купить", "AddToCart", "ShoppingCart", new { id = b.OrderCodeId }, null)
+                        </p>
+                    </td>
                 </tr>
             }
         </table>
     </div>
 </body>
 </html>
+

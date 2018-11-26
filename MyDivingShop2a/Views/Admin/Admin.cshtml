@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <h2>Администрирование</h2>
+</head>
+<body>
+    <div class="container">
+        <div id="sideBar">
+            <ul>
+                <li>@Html.ActionLink("Добавить категорию", "CreateCategory", "Admin")</li>
+                <li>@Html.ActionLink("Добавить продукт", "Create", "Admin")</li>
+                <li>@Html.ActionLink("Просмотр заказов", "Orders", "Admin")</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

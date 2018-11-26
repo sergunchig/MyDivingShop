@@ -1,0 +1,40 @@
+﻿@model MyDivingShop2a.ViewModels.OrdersViewModel
+
+@{
+    ViewBag.Title = "OrdersInfo";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Orders</title>
+</head>
+<body>
+    <div>
+        <h3>Заказ № @Model.orderItems.First(n=> n.OrderId==n.OrderId).OrderId.ToString()</h3>
+        <table>
+            <tr>
+                <td><p>Название продукта</p></td>
+                <td><p>количество</p></td>
+                <td><p>Цена</p></td>
+                <td></td>
+            </tr>
+
+            @foreach (var b in Model.orderItems)
+            {
+                <tr>
+                    <td><p>@Model.products.Single(p => p.OrderCodeId == b.OrderCodeId).ProdName</p></td>
+                    <td><p>@b.Quantity</p></td>
+                    <td><p>@Model.products.Single(p => p.OrderCodeId == b.OrderCodeId).Price</p></td>
+                </tr>
+            }
+        </table>
+        <p class="button">
+            @Html.ActionLink("Выдать", "Index", "Home"@*new { id = b.OrderId }, null*@)
+        </p>
+    </div>
+</body>
+</html>
+

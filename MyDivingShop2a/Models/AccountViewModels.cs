@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MyDivingShop.Models;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace MyDivingShop2a.Models
@@ -17,6 +18,7 @@ namespace MyDivingShop2a.Models
 
     public class SendCodeViewModel
     {
+        public int CustomerId { get; set; }
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
         public string ReturnUrl { get; set; }
@@ -68,6 +70,16 @@ namespace MyDivingShop2a.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        public string CustName { get; set; }
+        [Required] 
+        public string City { get; set; }
+        [Required]
+        public string Address { get; set; }
+
+        //public virtual ICollection<Orders> Orders { get; set; }
+
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

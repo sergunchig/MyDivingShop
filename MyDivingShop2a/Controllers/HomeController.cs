@@ -1,30 +1,60 @@
-﻿using System;
+﻿using MyDivingShop.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MyDivingShop2a.Models;
+using Microsoft.AspNet.Identity.Owin;
+using MyDivingShop2a;
+using Microsoft.AspNet.Identity;
 
-namespace MyDivingShop2a.Controllers
+namespace MyDivingShop.Controllers
 {
     public class HomeController : Controller
-    {
+    {        
+        ApplicationDbContext db = new ApplicationDbContext();
+
         public ActionResult Index()
         {
-            return View();
+            ApplicationUserManager userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            ApplicationUser user = userManager.FindByEmail(User.Identity.Name);
+
+            if (user != null)
+            {
+                var rolle = userManager.GetRoles(user.Id);
+                if (rolle.Count != 0)
+                {
+                    ViewBag.view = "visibility:visible";
+                }
+                else
+                {
+                    ViewBag.view = "visibility:hidden";
+                }
+            }
+            else
+            {
+                ViewBag.view = "visibility:hidden";
+            }
+                
+            IEnumerable<Product> products = db.products;
+            ViewBag.produkts = products;
+            var cat = db.categories.ToList();
+            return View(cat);
         }
 
-        public ActionResult About()
+        public ActionResult Browse(int cat)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            var catModel = db.products.Where(cm=> cm.CatId == cat);
+            return View(catModel);
         }
 
-        public ActionResult Contact()
+        [ChildActionOnly]
+        public ActionResult categoriesMenu()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            var cat = db.categories.ToList();
+            return PartialView(cat);
         }
+
     }
 }

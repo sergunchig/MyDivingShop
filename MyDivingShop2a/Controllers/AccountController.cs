@@ -78,7 +78,7 @@ namespace MyDivingShop2a.Controllers
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
-                case SignInStatus.Success:
+                case SignInStatus.Success:                    
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -151,9 +151,10 @@ namespace MyDivingShop2a.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                //var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
+                var user = new ApplicationUser { UserName=model.Email, Email = model.Email, CustName=model.CustName, City=model.City, Address=model.Address};
                 var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                if (true/*result.Succeeded*/)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
@@ -448,7 +449,7 @@ namespace MyDivingShop2a.Controllers
             if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
-            }
+            }            
             return RedirectToAction("Index", "Home");
         }
 
